@@ -40,7 +40,7 @@ translateDispModule.service("chatTransSvc", ['$http', function ($http) {
     };
 }])
 
-translateDispModule.controller("translateDisplay", ['$scope', 'chatTransSvc', function($scope, chatTransSvc) {
+translateDispModule.controller("translateDisplay", ['$scope',　'$timeout', 'chatTransSvc', function($scope, $timeout, chatTransSvc) {
 //Global variable
     //  for Recognition
     $scope.nowRecognition = false;
@@ -113,7 +113,7 @@ translateDispModule.controller("translateDisplay", ['$scope', 'chatTransSvc', fu
         plugins.speechrecognizer.startRecognize(function(result){
             ////when div field
             //document.input_field.value = result;
-            $scope.set_recognizedResult(result);
+            $scope.set_message(result);
             //
             console.log("Result : " + result);
             //
@@ -137,7 +137,7 @@ translateDispModule.controller("translateDisplay", ['$scope', 'chatTransSvc', fu
         return document.getElementById("msg_text").value;
     };
 
-    $scope.set_recognizedResult = function(recognizedText) {
+    $scope.set_message = function(recognizedText) {
         document.getElementById("msg_text").value = recognizedText;
     };
 
@@ -224,13 +224,13 @@ translateDispModule.controller("translateDisplay", ['$scope', 'chatTransSvc', fu
         $scope.ds.send(data,
             function(err, datnum) {
                 console.log("sending complete" + datnum);
+                $scope.set_message("");
+                $scope.json_add(2, $scope.user_name, $scope.select_lang, message);
             },
             function(err){
                 console.log("sending error");
             }
         );
-        var side = 2;
-        $scope.json_add(side, $scope.user_name, $scope.select_lang, message);
     };
 
     $scope.sel1_init = function() {
@@ -396,7 +396,9 @@ translateDispModule.controller("translateDisplay", ['$scope', 'chatTransSvc', fu
     };
     $scope.updateResults = function(jsdata) {
         console.log("Call updateResults");
-        $scope.results.push(jsdata);
+        $timeout(function() {
+            $scope.results.push(jsdata);
+        }, 0);
     };
 
 
