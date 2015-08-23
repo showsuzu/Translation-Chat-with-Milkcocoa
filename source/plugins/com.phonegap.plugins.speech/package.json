@@ -1,0 +1,15 @@
+{
+    "version": "1.0.0",
+    "name": "com.phonegap.plugins.speech",
+    "cordova_name": "speech",
+    "description": "\nThe TTS class that allows you to access the devices TTS services.\n\nA simple use case would be:\n\n- Playing text passed into the service out as synthesized speech\n",
+    "license": "\nPhoneGap is available under *either* the terms of the modified BSD license *or* the\nMIT License (2008). As a recipient of PhonegGap, you may choose which\nlicense to receive this code under (except as noted in per-module LICENSE\nfiles). Some modules may not be the copyright of Nitobi.   These\nmodules contain explicit declarations of copyright in both the LICENSE files in\nthe directories in which they reside and in the code itself. No external\ncontributions are allowed under licenses which are fundamentally incompatible\nwith the MIT or BSD licenses that PhoneGap is distributed under.\n  ",
+    "keywords": [
+        "cordova",
+        "speech"
+    ],
+    "platforms": [
+        "android"
+    ],
+    "engines": []
+}

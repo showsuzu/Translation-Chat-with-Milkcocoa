@@ -1,0 +1,412 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    background-color:#E4E4E4;
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    width:100%;
+    background-color: #6f92c0;
+}
+
+/* Portrait layout (default) */
+/*
+.app {
+*/
+#app_title {
+    position: fixed;
+    background-color: #F8F8F8;
+    z-index: 1;
+}
+
+#deviceready {
+    background:url(../img/logo.png) no-repeat center top; /* 170px x 200px */
+    position:absolute;             /* position in the center of the screen */
+    left:50%;
+    top:50%;
+    height:50px;                   /* text area height */
+    width:225px;                   /* text area width */
+    text-align:center;
+    padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
+    margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
+                                   /* offset horizontal: half of text area width */
+}
+
+/* Landscape layout (with min-width) */
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+    background-color: #F8F8F8;
+}
+
+.event {
+    border-radius:4px;
+    -webkit-border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    background-color:#333333;
+    display:block;
+}
+
+.event.received {
+    background-color:#4B946A;
+    display:none;
+}
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+@-webkit-keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+ 
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+.fullsize {
+    height: 100%;
+    width: 100%;
+}
+.textcom {
+    font-size: large;
+ }
+#trans {
+    background: -webkit-linear-gradient(top,#008dfd 30%,#0370ea 100%);
+    color: white;
+    text-shadow: 1px 1px 1px #076bd2;
+    border-radius: 3px;
+    border: 1px solid #076bd2;
+    padding: 8px 25px;
+    font-weight: 700;
+    font-size: 15px;
+    float: left;
+    margin: 10px 5px 10px 10px;
+}
+#trans.select {
+    background: -webkit-linear-gradient(top,#f2739e 30%,#f23f7b 100%);
+    text-shadow: 1px 1px 1px #f1115c;
+    border: 1px solid #f1115c;
+}
+#spk {
+    background: -webkit-linear-gradient(top,#008dfd 30%,#0370ea 100%);
+    color: white;
+    text-shadow: 1px 1px 1px #076bd2;
+    border-radius: 3px;
+    border: 1px solid #076bd2;
+    padding: 8px 25px;
+    font-weight: 700;
+    font-size: 15px;
+    float: left;
+    margin: 10px 10px 10px 5px;
+}
+#spk.select {
+    background: -webkit-linear-gradient(top,#f2739e 30%,#f23f7b 100%);
+    text-shadow: 1px 1px 1px #f1115c;
+    border: 1px solid #f1115c;
+}
+#btn1 {
+    background: -webkit-linear-gradient(top,#008dfd 30%,#0370ea 100%);
+    color: white;
+    text-shadow: 1px 1px 1px #076bd2;
+    border-radius: 3px;
+    border: 1px solid #076bd2;
+    padding: 8px 25px;
+    font-weight: 700;
+    font-size: 15px;
+}
+#btn1.select {
+    background: -webkit-linear-gradient(top,#f2739e 30%,#f23f7b 100%);
+    text-shadow: 1px 1px 1px #f1115c;
+    border: 1px solid #f1115c;
+}
+#select1 {
+    width: 100px;
+    font-size: large;
+    margin-left: 10px;
+}
+#select2 {
+    width: 100px;
+    font-size: large;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+#msg_text {
+    float: left;
+    width: 90%;
+    margin-bottom: 5px;
+}
+#button_area {
+    float: left;
+    width: 9%;
+}
+.round-button {
+    margin: 2px;
+    width: 100%;
+}
+.round-button-circle {
+  width: 100%;
+  height: 0;
+  padding-bottom: 100%;
+  border-radius: 50%;
+  border: 1px solid;
+  color: #F0FFFF;
+  overflow: hidden;
+  box-shadow: 0 0 3px gray;
+}
+.circle-left{
+  /* border-color: #eccfcf; */
+  border-color: #ffffff;
+  background-color: #f55555;
+}
+.circle_right {
+  /* border-color: #cfdcec; */
+  border-color: #ffffff;
+  background-color: #4679BD;
+}
+#button_l {
+  float: left;
+  margin: 10px 10px 10px 2px;
+}
+#button_r {
+  float: left;
+  margin: 10px 1px 10px 1px;
+}
+
+.round-button a {
+  display: block;
+  float: left;
+  width: 100%;
+  padding-top: 50%;
+  padding-bottom: 50%;
+  line-height: 1em;
+  margin-top: -0.5em;
+  text-align: center;
+  color: #989898;
+  font-family: Verdana;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: none;
+}
+#chat_area {
+    width: 100%;
+}
+#chat_iframe{
+    width: 98%;
+    height: 200px;
+}
+#ttl_area {
+    position: fixed !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    background-color: #F8F8F8;
+}
+#ang_area {
+    position: fixed !important;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    border-bottom-color: rgb(126, 123, 123);
+    border-bottom-style: solid;
+    border-bottom-width: 4px;
+    background-color: #F8F8F8;
+}
+#selecter_area {
+    margin: 5px;
+    margin-top: 20px;
+}
+#message_area {
+    margin: 5px;
+    padding-bottom: 20px;
+}
+
+
+/*****************/
+/* for Login     */
+/*****************/
+.login-form {
+  text-align: center;
+  width: 80%;
+  margin: 60px auto 0;
+  background-color: #F8F8F8;
+}
+
+input[type=email], input[type=text], input[type=password] {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  outline: none;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.forgot-password {
+  display: block;
+  margin: 8px auto 0 auto;
+  font-size: 14px;
+}
+
+/*****************/
+/* for Time line */
+/*****************/
+#wrapper{
+    background-color: #6f92c0;
+    width:100%;
+    padding-top: 0px;
+    margin-top: 330px;
+    z-index: 3;
+}
+
+.sp1_box,
+.sp2_box{
+     width:80%;
+}
+
+.sp1_box{float: left;}
+.sp2_box{float: right;}
+
+
+img.left-image,
+img.right_image{
+     width:15%;
+     margin-right: 10px;
+}
+
+img.left-image{float: left;}
+img.right_image{float: right;}
+
+
+p.name02,
+p.name{
+     font-size: 14px;
+     color: #fff;
+     margin:0;
+}
+
+p.name02{text-align: right;}
+
+
+#arrow_sp2,
+#arrow_sp1 {
+     position: relative;
+     display: inline-block;
+     padding: 3%;
+     width: 88%;
+     font-size: 13px;
+     margin-left:3%;
+     margin-top: 3px;
+     margin-bottom: 25px;
+     color: #000;
+     border-radius: 10px;
+}
+
+#arrow_sp1 {
+     background: #fff;
+}
+
+#arrow_sp2 {
+     background: #85e249;
+}
+
+#arrow_sp2:before,
+#arrow_sp1:before {
+     content: "";
+     position: absolute;
+     top: 0px;
+     margin-left: 0;
+     display: block;
+     width: 30px;
+     height: 30px;
+     z-index: -1;
+}
+
+#arrow_sp1:before {
+     left: -10px;
+     background: #fff;
+     border-radius: 0px 30px;
+}
+
+#arrow_sp2:before{
+     right: -10px;
+     background: #85e249;
+     border-radius: 30px 0;
+}
+
+
+#arrow_sp2:after,
+#arrow_sp1:after {
+     content: "";
+     position: absolute;
+     top: -10px;
+     margin-left: 0px;
+     display: block;
+     width: 25px;
+     height: 25px;
+     background: none repeat scroll 0% 0% #6f92c0;
+     z-index: -1;
+}
+
+#arrow_sp1:after {
+     left: -12px;
+     transform: rotate(10deg);
+     border-radius: 0px 30px;
+}
+
+#arrow_sp2:after {
+     right: -12px;
+     border-radius: 30px 0px;
+     transform: rotate(20deg);
+}
+
+

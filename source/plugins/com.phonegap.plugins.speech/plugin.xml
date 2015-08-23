@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="com.phonegap.plugins.speech" version="1.0.0" platform = "Android">
+   <name>speech</name>
+
+   <author href="http://www.ibm.com/" email="simon.macdonald@gmail.com">Simon MacDonald</author>
+
+   <description>
+The TTS class that allows you to access the devices TTS services.
+
+A simple use case would be:
+
+- Playing text passed into the service out as synthesized speech
+</description>
+
+   <license>
+PhoneGap is available under *either* the terms of the modified BSD license *or* the
+MIT License (2008). As a recipient of PhonegGap, you may choose which
+license to receive this code under (except as noted in per-module LICENSE
+files). Some modules may not be the copyright of Nitobi.   These
+modules contain explicit declarations of copyright in both the LICENSE files in
+the directories in which they reside and in the code itself. No external
+contributions are allowed under licenses which are fundamentally incompatible
+with the MIT or BSD licenses that PhoneGap is distributed under.
+  </license>
+
+   <keywords>cordova,speech</keywords>
+
+   <js-module name="speech" src="www/tts.js">
+      <clobbers target="cordova.plugins.speech" />
+   </js-module>
+
+   <platform name="android">
+      <config-file parent="/*" target="res/xml/config.xml">
+         <feature name="speech">
+            <param name="android-package" value="com.phonegap.plugins.speech" />
+         </feature>
+      </config-file>
+      
+      <config-file parent="/*" target="AndroidManifest.xml" />
+      
+      <source-file src="src/com/phonegap/plugins/speech/TTS.java" target-dir="src/com/phonegap/plugins/speech" />
+	  
+   </platform>
+
+</plugin>

@@ -1,0 +1,14 @@
+{
+    "version": "0.1.0",
+    "name": "org.apache.cordova.speech.speechsynthesis",
+    "cordova_name": "SpeechSynthesis",
+    "description": "Cordova Speech Synthesis Plugin",
+    "license": "MIT",
+    "keywords": [
+        "cordova",
+        "speech",
+        "synthesis",
+        "tts"
+    ],
+    "engines": []
+}

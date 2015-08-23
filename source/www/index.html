@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <title>Translation and Chat</title>
+
+        <!-- JS dependencies (order matters!) -->
+        <script src="scripts/platformOverrides.js"></script>
+        <script src="lib/angular/angular.js"></script>
+        <script src="lib/onsen/js/onsenui.js"></script>
+        <script src='https://cdn.mlkcca.com/v2.0.0/milkcocoa.js'></script>
+
+        <!-- CSS dependencies -->
+        <link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+        <link rel="stylesheet" href="lib/onsen/css/onsen-css-components-blue-basic-theme.css" />
+
+        <!-- CSP support mode (required for Windows Universal apps) -->
+        <link rel="stylesheet" href="lib/angular/angular-csp.css" />
+
+
+    </head>
+    <body>
+        <div class="app">
+            <div class="navigation-bar">
+                <div id="app_title" class="navigation-bar__center navigation-bar__title">Translation　Chat</div> 
+            </div>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
+            </div>
+            <div ng-app="translateDisp" ng-controller="translateDisplay">
+                <div id="loginDisp">
+                    <div class="login-form">
+                        <input id="dispname" type="text" class="text-input--underbar" placeholder="Display Name" value="">
+                        <br>
+                        <ons-button modifier="large" class="button button--cta" ng-click="st_session()">Log In</ons-button>
+                        <br><br>
+                    </div>
+                </div>
+                <div id="ang_area">
+                    <div id="selecter_area" margin-top: 20px;>
+                        <ons-row>
+                            <select id="select1" ng-model="sel1" ng-options="lang.name for lang in languages" ng-change="sel1_func()" ng-init="sel1_init()">
+                            </select>
+                        </ons-row>
+                    </div>
+                    <div id="message_area" padding-bottom: 20px;>
+                        <ons-row>
+                            <ons-col>
+                                <textarea id="msg_text" class="textarea" rows="4" placeholder="Message input area" name="input_mag_field"></textarea>
+                            </ons-col>
+                            <ons-col>
+                                <div id="button_area">
+                                    <div class="round-button">
+                                        <div class="round-button-circle" ng-click="rec_msg()">
+                                            <a class="round-button">
+                                                <i class="fa fa-microphone"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="round-button">
+                                        <div class="round-button-circle" ng-click="send_msg()">
+                                            <a class="round-button">
+                                                <i class="fa fa-paper-plane"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ons-col>
+                        </ons-row>
+                    </div>
+                </div>
+                <div id="wrapper">
+                    <div ng-class="select_speaker(result.side)" ng-repeat="result in results" on-finish-repeat>
+                        <p ng-class="select_name(result.side)">{{result.who}}</p>
+                        <div id="arrow_sp{{result.side}}">
+                            <div>{{result.lang}} : {{result.input}}</div>
+                            <div ng-if="(result.side==1 && result.lang != select_lang)">
+                                <hr>
+                                <div> to {{result.mylang}} : {{result.translated}}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/operation.js"></script>
+    </body>
+</html>
